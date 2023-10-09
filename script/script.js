@@ -44,7 +44,7 @@ function drawSnake() {
 
 function drawFood() { 
   context.fillStyle = "red";
-  context.fillRect(food.x, food.y, tileSize, tileSize);
+  context.fillRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
 }
 
 function updateSnakeHead() { 
@@ -76,6 +76,7 @@ function eatFood() {
   if (food.x === snakeHead.x && food.y === snakeHead.y) {
     snakeTailCount++;
 
+    // snake.unshift(snakeHead);
 
     food.x = Math.floor(Math.random() * tileCount);
     food.y = Math.floor(Math.random() * tileCount);
