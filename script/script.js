@@ -5,6 +5,11 @@ gameField.width = 600;
 gameField.height = 600;
 let tileSize = 20;
 let tileCount = gameField.width / tileSize;
+const audioCrunch = new Audio();
+audioCrunch.src = "../media/crunch.mp3";
+const audioScream = new Audio();
+audioScream.src = "../media/scream.mp3";
+
 
 let speed = {
   x: 0,
@@ -21,7 +26,6 @@ let snakeHead = {
   x: 10,
   y: 10
 };
-// snake = [snakeHead, snakeHead];
 
 let snakeTailCount = 1;
 
@@ -31,10 +35,17 @@ function drawGameField() {
   context.fillRect(0, 0, gameField.width, gameField.height);
 }
 function drawSnake() {
-  context.fillStyle = "green";
   for (let i = 0; i < snake.length; i++) {
-    // context.fillStyle = "green";
+    if (i === snake.length - 1) {
+      context.fillStyle = "yellow";
+      context.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, tileSize, tileSize);
+  } else { 
+    context.fillStyle = "green";
     context.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, tileSize, tileSize);
+  }
+    if ((snakeTailCount > 1) && snake[i].x === snakeHead.x && snake[i].y === snakeHead.y) { 
+      audioScream.play();
+    }
 
     if (snake[i].x === snakeHead.x && snake[i].y === snakeHead.y) { 
       snakeTailCount = 1;
@@ -75,12 +86,11 @@ function updateSnakeBody() {
 function eatFood() { 
   if (food.x === snakeHead.x && food.y === snakeHead.y) {
     snakeTailCount++;
-
-    // snake.unshift(snakeHead);
+    audioCrunch.play();
 
     food.x = Math.floor(Math.random() * tileCount);
     food.y = Math.floor(Math.random() * tileCount);
-    // drawFood();
+  
   }
 }
 
@@ -121,3 +131,4 @@ function updateGame() {
 //events
 document.addEventListener('keydown', onKeyDown);
 setInterval(updateGame, 200);
+
