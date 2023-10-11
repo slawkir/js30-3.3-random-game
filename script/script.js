@@ -9,6 +9,8 @@ const audioCrunch = new Audio();
 audioCrunch.src = "../media/crunch.mp3";
 const audioScream = new Audio();
 audioScream.src = "../media/scream.mp3";
+let score = document.querySelector('.score');
+let count = 0;
 
 
 let speed = {
@@ -39,16 +41,18 @@ function drawSnake() {
     if (i === snake.length - 1) {
       context.fillStyle = "yellow";
       context.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, tileSize, tileSize);
-  } else { 
-    context.fillStyle = "green";
-    context.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, tileSize, tileSize);
-  }
+    } else { 
+      context.fillStyle = "green";
+      context.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, tileSize, tileSize);
+    }
     if ((snakeTailCount > 1) && snake[i].x === snakeHead.x && snake[i].y === snakeHead.y) { 
       audioScream.play();
     }
 
     if (snake[i].x === snakeHead.x && snake[i].y === snakeHead.y) { 
       snakeTailCount = 1;
+      count = 0;
+      score.textContent = count;
     }
   }
 };
@@ -57,6 +61,10 @@ function drawFood() {
   context.fillStyle = "red";
   context.fillRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
 }
+function countGame() { 
+  count++;
+  score.textContent = count;
+};
 
 function updateSnakeHead() { 
   snakeHead.x += speed.x;
@@ -83,14 +91,24 @@ function updateSnakeBody() {
   }
 }
 
+function changeHead() {
+  for (let i = 0; i < snake.length; i++) {
+    if (i === snake.length - 1) {
+      context.fillStyle = "orange";
+      context.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, tileSize*1.5, tileSize*1.5);
+    }
+  }
+}
+
 function eatFood() { 
   if (food.x === snakeHead.x && food.y === snakeHead.y) {
     snakeTailCount++;
     audioCrunch.play();
+    countGame();
+    changeHead();
 
     food.x = Math.floor(Math.random() * tileCount);
     food.y = Math.floor(Math.random() * tileCount);
-  
   }
 }
 
@@ -130,5 +148,5 @@ function updateGame() {
 
 //events
 document.addEventListener('keydown', onKeyDown);
-setInterval(updateGame, 200);
+setInterval(updateGame, 250);
 
