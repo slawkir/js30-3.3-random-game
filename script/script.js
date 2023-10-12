@@ -11,6 +11,7 @@ const audioScream = new Audio();
 audioScream.src = "../media/scream.mp3";
 let score = document.querySelector('.score');
 let count = 0;
+const startButton = document.querySelector('.start');
 
 
 let speed = {
@@ -148,5 +149,9 @@ function updateGame() {
 
 //events
 document.addEventListener('keydown', onKeyDown);
-setInterval(updateGame, 250);
+setInterval(updateGame, 250); //скорость меняется в зависимости от уровня сложности игры
+
+// pop-up => name, уровень сложности (появляется на месте canvas)
+// local-storage массив на 10 элементов (object {name:"...", score:  )
+// ранжирование результатов в таблице слева
 
