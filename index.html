@@ -26,32 +26,29 @@
       </div>
       <div class="game-container">
         <canvas id="game-field"></canvas>
-        <button class="start">Start</button>
+
+
+        <div class="intro">
+          <form class="modal-form">
+            <div class="modal-form__item">
+              <label for="player-name">Enter your name</label>
+              <input type="text" id="player-name" name="player-name">
+            </div>
+            <div class="modal-form__item">
+              <label for="player-level">Select level</label>
+              <select name="player-level" id="player-level">
+                <option value="easy">easy</option>
+                <option value="medium">medium</option>
+                <option value="hard">hard</option>
+              </select>
+            </div>
+            <button class="start">Start</button>
+          </form>
+        </div>
         <div class="score-title">
           Score: <span class="score">0</span>
         </div>
       </div>
-      
-    </div>
-  </div>
-  <div class="pop-start">
-    <div class="pop-start__content">
-      <form class="modal-form">
-        <div class="modal-form__item">
-          <label for="player-name">Enter your name</label>
-          <input type="text" id="player-name" name="player-name">
-        </div>
-        <div class="modal-form__item">
-          <label for="player-level">Select level</label>
-          <select name="player-level" id="player-level">
-            <option value="easy">easy</option>
-            <option value="medium">medium</option>
-            <option value="hard">hard</option>
-          </select>
-        </div>
-        <button class="start">Start</button>
-      </form>
-      
     </div>
   </div>
   <script src="./script/script.js"></script>

@@ -1,5 +1,6 @@
 'use strict';
 const gameField = document.getElementById('game-field');
+const intro = document.querySelector('.intro');
 const context = gameField.getContext('2d');
 gameField.width = 600;
 gameField.height = 600;
@@ -33,6 +34,11 @@ let snakeHead = {
 let snakeTailCount = 1;
 
 // functions
+function startGame() { 
+  intro.remove();
+  gameField.style.display = 'block';
+}
+
 function drawGameField() {
   context.fillStyle = "black";
   context.fillRect(0, 0, gameField.width, gameField.height);
@@ -148,6 +154,8 @@ function updateGame() {
 }
 
 //events
+
+startButton.addEventListener('click', startGame);
 document.addEventListener('keydown', onKeyDown);
 setInterval(updateGame, 250); //скорость меняется в зависимости от уровня сложности игры
 
