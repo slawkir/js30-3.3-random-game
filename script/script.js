@@ -7,12 +7,14 @@ gameField.height = 600;
 let tileSize = 20;
 let tileCount = gameField.width / tileSize;
 const audioCrunch = new Audio();
-audioCrunch.src = "../media/crunch.mp3";
+audioCrunch.src = "../media/audio/crunch.mp3";
 const audioScream = new Audio();
-audioScream.src = "../media/scream.mp3";
+audioScream.src = "../media/audio/scream.mp3";
+const scoreTitle = document.querySelector('.score-title');
 let score = document.querySelector('.score');
 let count = 0;
 const startButton = document.querySelector('.start');
+const arrowsInfoBlock = document.querySelector('.arrows');
 
 
 let speed = {
@@ -37,10 +39,11 @@ let snakeTailCount = 1;
 function startGame() { 
   intro.remove();
   gameField.style.display = 'block';
+  arrowsInfoBlock.style.display = 'flex';
 }
 
 function drawGameField() {
-  context.fillStyle = "black";
+  context.fillStyle = "gray";
   context.fillRect(0, 0, gameField.width, gameField.height);
 }
 function drawSnake() {
@@ -59,7 +62,7 @@ function drawSnake() {
     if (snake[i].x === snakeHead.x && snake[i].y === snakeHead.y) { 
       snakeTailCount = 1;
       count = 0;
-      score.textContent = count;
+      score.innerHTML = count;
     }
   }
 };
@@ -70,7 +73,7 @@ function drawFood() {
 }
 function countGame() { 
   count++;
-  score.textContent = count;
+  score.innerHTML = count;
 };
 
 function updateSnakeHead() { 
@@ -141,7 +144,11 @@ const keyDownHandlers = {
 function onKeyDown(event) { 
   if (keyDownHandlers.hasOwnProperty(event.key)) { 
     keyDownHandlers[event.key]();
+    
+    arrowsInfoBlock.style.display = "none";
+    scoreTitle.style.visibility = 'visible';
   }
+  
 }
 
 function updateGame() { 
@@ -154,12 +161,17 @@ function updateGame() {
 }
 
 //events
-
 startButton.addEventListener('click', startGame);
 document.addEventListener('keydown', onKeyDown);
 setInterval(updateGame, 250); //скорость меняется в зависимости от уровня сложности игры
 
-// pop-up => name, уровень сложности (появляется на месте canvas)
+//после старта появляется подсказка "для начала игры нажмите на стрелки"
+//после нажатия стрелки подсказка пропадает
+
+// добавить в функцию INTRO функции по созданию и добавлению объектов
 // local-storage массив на 10 элементов (object {name:"...", score:  )
 // ранжирование результатов в таблице слева
+
+
+// при проигрыше появляется окно с результатом и вопросом "Хотите еще сыграть?"
 
