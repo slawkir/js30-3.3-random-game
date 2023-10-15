@@ -7,9 +7,9 @@ gameField.height = 600;
 let tileSize = 20;
 let tileCount = gameField.width / tileSize;
 const audioCrunch = new Audio();
-audioCrunch.src = "../media/audio/crunch.mp3";
+audioCrunch.src = "./audio/crunch.mp3";
 const audioScream = new Audio();
-audioScream.src = "../media/audio/scream.mp3";
+audioScream.src = "./audio/scream.mp3";
 const scoreTitle = document.querySelector('.score-title');
 let score = document.querySelector('.score');
 let count = 0;
@@ -165,8 +165,6 @@ startButton.addEventListener('click', startGame);
 document.addEventListener('keydown', onKeyDown);
 setInterval(updateGame, 250); //скорость меняется в зависимости от уровня сложности игры
 
-//после старта появляется подсказка "для начала игры нажмите на стрелки"
-//после нажатия стрелки подсказка пропадает
 
 // добавить в функцию INTRO функции по созданию и добавлению объектов
 // local-storage массив на 10 элементов (object {name:"...", score:  )
