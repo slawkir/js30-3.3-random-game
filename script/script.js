@@ -15,6 +15,11 @@ let score = document.querySelector('.score');
 let count = 0;
 const startButton = document.querySelector('.start');
 const arrowsInfoBlock = document.querySelector('.arrows');
+const inputName = document.getElementById('player-name');
+const inputLevel = document.getElementById('player-level');
+const gameContainer = document.querySelector('.game-container');
+const buttonReload = document.querySelector('.reload');
+
 
 
 let speed = {
@@ -36,16 +41,66 @@ let snakeHead = {
 let snakeTailCount = 1;
 
 // functions
-function startGame() { 
-  intro.remove();
-  gameField.style.display = 'block';
-  arrowsInfoBlock.style.display = 'flex';
+function createUser() { 
+  let userName = inputName.value;
+  // let userLevel = inputLevel.value;
+  let userCount = 0;
+
+ 
+  return {
+    name: userName,
+    // level: userLevel,
+    points: userCount
+  };
+}
+let user;
+
+function startProccess() {
+  startGame();
+  console.log(user);
+  // setTimeout(intro.remove(), 3000); 
+  intro.remove(); 
 }
 
+function startGame() { 
+  gameField.style.display = 'block';
+  arrowsInfoBlock.style.display = 'flex';
+  user = createUser();
+  // console.log(user);
+}
+// function setSpeed() { 
+//   if (user.level === "easy") {
+//     return 220;
+//   } else if (user.level === "medium") { 
+//     return 150;
+//   } else if (user.level === "hard") {
+//     return 75;
+//   }
+// }
 function drawGameField() {
   context.fillStyle = "gray";
   context.fillRect(0, 0, gameField.width, gameField.height);
 }
+
+function endGame() { 
+  gameField.remove();
+  intro.remove();
+  intro.remove();
+  arrowsInfoBlock.remove();
+  scoreTitle.remove();
+
+  let div = document.createElement('div');
+  gameContainer.append(div);
+  gameContainer.style.justifyContent = 'center';
+  div.className = 'alert';
+  div.innerHTML = `Your result, ${user.name}: ${user.points}`;
+
+  let btnReload = document.createElement('button');
+  gameContainer.append(btnReload);
+  btnReload.className = 'reload';
+  btnReload.innerHTML = 'Continue';
+}
+
 function drawSnake() {
   for (let i = 0; i < snake.length; i++) {
     if (i === snake.length - 1) {
@@ -57,6 +112,7 @@ function drawSnake() {
     }
     if ((snakeTailCount > 1) && snake[i].x === snakeHead.x && snake[i].y === snakeHead.y) { 
       audioScream.play();
+      endGame();
     }
 
     if (snake[i].x === snakeHead.x && snake[i].y === snakeHead.y) { 
@@ -74,6 +130,7 @@ function drawFood() {
 function countGame() { 
   count++;
   score.innerHTML = count;
+  user.points = count;
 };
 
 function updateSnakeHead() { 
@@ -161,15 +218,14 @@ function updateGame() {
 }
 
 //events
-startButton.addEventListener('click', startGame);
+startButton.addEventListener('click', startProccess);
 document.addEventListener('keydown', onKeyDown);
-setInterval(updateGame, 250); //скорость меняется в зависимости от уровня сложности игры
+setInterval(updateGame, 200); 
+document.addEventListener('click', (e) => {
+  if (e.target.className === 'reload') {
+    console.log('+');
+    document.location.reload();
+  }
+});
 
-
-// добавить в функцию INTRO функции по созданию и добавлению объектов
-// local-storage массив на 10 элементов (object {name:"...", score:  )
-// ранжирование результатов в таблице слева
-
-
-// при проигрыше появляется окно с результатом и вопросом "Хотите еще сыграть?"
 
