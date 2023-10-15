@@ -78,7 +78,7 @@ function startGame() {
 //   }
 // }
 function drawGameField() {
-  context.fillStyle = "gray";
+  context.fillStyle = "lightgray";
   context.fillRect(0, 0, gameField.width, gameField.height);
 }
 

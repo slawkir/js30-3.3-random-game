@@ -6,10 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snake-game</title>
   <link rel="stylesheet" href="./style/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="game-wrapper">
     <div class="game">
+      <header>
+        <h1>Snake-game</h1>
+      </header>
       <!-- <div class="game-result">
         <ul>
           <li>1</li>
@@ -26,8 +32,6 @@
       </div> -->
       <div class="game-container">
         <canvas id="game-field"></canvas>
-
-
         <div class="intro">
           <form class="modal-form">
             <div class="modal-form__item">
@@ -53,6 +57,16 @@
           Score: <span class="score">0</span>
         </div>
       </div>
+      <footer>
+        <a href="https://github.com/slawkir" target="_blank">
+          <img src="./img/icons-github.png" alt="github">
+        </a>
+        <span>2023</span>
+        <a href="https://rs.school/js-stage0/" target="_blank">
+          <img src="./img/rs_school_js.svg" alt="github" width="80px">
+        </a>
+        
+      </footer>
     </div>
   </div>
   <script src="./script/script.js"></script>
